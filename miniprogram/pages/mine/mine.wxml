@@ -1,0 +1,13 @@
+<!--mine.wxml-->
+<view class="container">
+  <view class="profile">
+    <image class="avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+    <text class="nickname">{{userInfo.nickName}}</text>
+  </view>
+  <view class="options">
+    <button class="option-button" bindtap="viewDictionary" disabled>字典</button>
+    <button class="option-button" bindtap="viewMap" disabled>地图</button>
+    <button class="option-button" bindtap="downloadResources" disabled>下载资源</button>
+    <button class="option-button" bindtap="openStore" disabled>商城</button>
+  </view>
+</view>

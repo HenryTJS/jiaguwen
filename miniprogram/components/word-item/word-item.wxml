@@ -1,0 +1,5 @@
+<!-- filepath: e:\test\miniprogram\components\word-item\word-item.wxml -->
+<view class="word-item" bindtap="onWordTap">
+  <image class="word-image" src="{{image}}" mode="aspectFit"></image>
+  <text class="word-text">{{text}}</text>
+</view>

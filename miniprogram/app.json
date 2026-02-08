@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/newpage/newpage",
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/partone/partone",
+    "pages/parttwo/parttwo",
+    "pages/mapdetail/mapdetail",
+    "pages/worddetail/worddetail"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/newpage/newpage",
+        "text": "首页",
+        "iconPath": "images/home-icon.png",
+        "selectedIconPath": "images/home-icon.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/my-icon.png",
+        "selectedIconPath": "images/my-icon.png"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "default"
+  },
+  "style": "v2",
+  "rendererOptions": {
+    "skyline": {
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true,
+      "disableABTest": true,
+      "sdkVersionBegin": "3.0.0",
+      "sdkVersionEnd": "15.255.255"
+    }
+  },
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "entryPagePath": "pages/newpage/newpage"
+}

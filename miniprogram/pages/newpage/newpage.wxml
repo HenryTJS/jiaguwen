@@ -1,0 +1,36 @@
+<!--newpage.wxml-->
+<view class="container">
+  <image class="background-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/beijing.jpg" mode="aspectFill"></image>
+
+  <!-- 内容区域 -->
+  <view class="content">
+    <image class="top-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/5.jpg" mode="aspectFit"></image>
+    <image class="oracle-title-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/今日卜辞.png" mode="aspectFit"></image>
+
+      <!-- 今日卜辞内容 -->
+    <view class="oracle-a">{{oracleDetail.a}}</view>
+    <view class="oracle-b">{{oracleDetail.b}}</view>
+    <view class="oracle-c">{{oracleDetail.c}}</view>
+    <view class="oracle-d">{{oracleDetail.d}}</view>
+
+    <!-- 图片区域 -->
+    <view class="image-grid">
+      <view class="grid-item">
+        <image class="grid-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/1.png" mode="aspectFit" bindtap="onImageClick" data-src="/images/1.png"></image>
+        <text class="grid-label">互动字典</text>
+      </view>
+      <view class="grid-item">
+        <image class="grid-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/2.png" mode="aspectFit" bindtap="onImageClick" data-src="/images/2.png"></image>
+        <text class="grid-label">古今穿越地图</text>
+      </view>
+      <view class="grid-item">
+        <image class="grid-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/3.png" mode="aspectFit" bindtap="onImageClick" data-src="/images/3.png"></image>
+        <text class="grid-label">IP资源下载</text>
+      </view>
+      <view class="grid-item">
+        <image class="grid-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/4.png" mode="aspectFit" bindtap="onImageClick" data-src="/images/4.png"></image>
+        <text class="grid-label">文创商城</text>
+      </view>
+    </view>
+  </view>
+</view>

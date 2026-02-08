@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "word-item": "/components/word-item/word-item"
+  },
+  "navigationBarTitleText": "甲骨动典",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black"
+}

@@ -1,0 +1,181 @@
+.content {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  padding-bottom: 100rpx;
+}
+
+.detail-container {
+  position: relative;
+  z-index: 1;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.picture-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+  padding: 20rpx;
+}
+
+.detail-picture {
+  width: 100%;
+  display: block;
+}
+
+.video-section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.1);
+}
+
+.detail-video {
+  width: 100%;
+  height: 400rpx;
+  display: block;
+}
+
+/* 互动栏样式 */
+.action-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20rpx 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  background-color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 8rpx;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-item:active {
+  transform: scale(0.95);
+  opacity: 0.7;
+}
+
+.action-text-large {
+  font-size: 28rpx;
+  line-height: 1;
+}
+
+.action-text {
+  font-size: 12rpx;
+  color: #666;
+}
+
+/* 评论输入框样式 */
+.comment-input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  padding: 12rpx 15rpx;
+  display: flex;
+  gap: 10rpx;
+  z-index: 100;
+}
+
+.comment-input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 8rpx;
+  padding: 8rpx 12rpx;
+  font-size: 14rpx;
+  box-sizing: border-box;
+  height: 40rpx;
+  resize: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.comment-btn {
+  background-color: #1aad19;
+  color: white;
+  border: none;
+  border-radius: 8rpx;
+  padding: 8rpx 16rpx;
+  font-size: 14rpx;
+  min-width: 50rpx;
+  height: 40rpx;
+}
+
+/* 评论列表样式 */
+.comments-list {
+  background-color: #ffffff;
+  padding: 20rpx 15rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.comments-header {
+  font-size: 16rpx;
+  font-weight: bold;
+  color: #333;
+  padding: 10rpx 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 15rpx;
+}
+
+.comment-item {
+  padding: 15rpx 0;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10rpx;
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-content {
+  flex: 1;
+}
+
+.comment-text {
+  font-size: 14rpx;
+  color: #333;
+  line-height: 1.6;
+  word-break: break-word;
+  margin-bottom: 8rpx;
+}
+
+.comment-time {
+  font-size: 12rpx;
+  color: #999;
+}
+
+.comment-delete {
+  font-size: 12rpx;
+  color: #ff6b6b;
+  padding: 4rpx 8rpx;
+  border: 1px solid #ff6b6b;
+  border-radius: 4rpx;
+  white-space: nowrap;
+  cursor: pointer;
+}

@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "properties": {
+    "text": { "type": "string", "value": "" },
+    "image": { "type": "string", "value": "" },
+    "detail": { "type": "string", "value": "" }
+  }
+}

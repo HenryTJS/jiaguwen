@@ -1,0 +1,37 @@
+<view class="container">
+  <image class="detail-image" src="{{image}}" mode="widthFix" show-menu-by-longpress="true" />
+  
+  <!-- 互动栏 -->
+  <view class="action-bar">
+    <view class="action-item" bindtap="toggleLike">
+      <view class="action-text-large">{{isLiked ? '❤️' : '🤍'}}</view>
+      <text class="action-text">{{likeCount}}</text>
+    </view>
+    <view class="action-item" bindtap="showCommentInput">
+      <view class="action-text-large">💬</view>
+      <text class="action-text">{{commentCount}}</text>
+    </view>
+    <view class="action-item" bindtap="showShareMenu">
+      <view class="action-text-large">🔄</view>
+      <text class="action-text">转发</text>
+    </view>
+  </view>
+  
+  <!-- 评论输入框 -->
+  <view class="comment-input-container" wx:if="{{showCommentInput}}">
+    <textarea class="comment-input" placeholder="写评论..." bindinput="onCommentInput" value="{{commentText}}" />
+    <button class="comment-btn" bindtap="submitComment">发送</button>
+  </view>
+  
+  <!-- 评论列表 -->
+  <view class="comments-list" wx:if="{{comments.length > 0}}">
+    <view class="comments-header">评论（{{comments.length}}）</view>
+    <view class="comment-item" wx:for="{{comments}}" wx:key="id">
+      <view class="comment-content">
+        <view class="comment-text">{{item.text}}</view>
+        <view class="comment-time">{{item.time}}</view>
+      </view>
+      <view class="comment-delete" bindtap="deleteComment" data-id="{{item.id}}">删除</view>
+    </view>
+  </view>
+</view>
