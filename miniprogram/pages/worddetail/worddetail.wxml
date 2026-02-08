@@ -11,10 +11,10 @@
       <view class="action-text-large">💬</view>
       <text class="action-text">{{commentCount}}</text>
     </view>
-    <view class="action-item" bindtap="showShareMenu">
+    <button class="action-item action-button" open-type="share">
       <view class="action-text-large">🔄</view>
       <text class="action-text">转发</text>
-    </view>
+    </button>
   </view>
   
   <!-- 评论输入框 -->
@@ -26,12 +26,16 @@
   <!-- 评论列表 -->
   <view class="comments-list" wx:if="{{comments.length > 0}}">
     <view class="comments-header">评论（{{comments.length}}）</view>
-    <view class="comment-item" wx:for="{{comments}}" wx:key="id">
+    <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
+      <image class="comment-avatar" src="{{item.authorAvatar}}" mode="aspectFill"></image>
       <view class="comment-content">
+        <view class="comment-header">
+          <view class="comment-author">{{item.authorName}}</view>
+          <view class="comment-time">{{item.time}}</view>
+        </view>
         <view class="comment-text">{{item.text}}</view>
-        <view class="comment-time">{{item.time}}</view>
       </view>
-      <view class="comment-delete" bindtap="deleteComment" data-id="{{item.id}}">删除</view>
+      <view class="comment-delete" wx:if="{{item._openid === openid}}" bindtap="deleteComment" data-id="{{item._id}}" data-openid="{{item._openid}}">删除</view>
     </view>
   </view>
 </view>
