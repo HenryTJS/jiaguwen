@@ -1,53 +1,27 @@
 const data = [
   {
-    text: "旦",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
+    text: "侧身立",
+    picture: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/1 侧身立.png"
   },
   {
-    text: "牧",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
+    text: "画来牛",
+    picture: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/2 画来牛.jpg"
   },
   {
-    text: "雨",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
+    text: "户牖间",
+    picture: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/3 户牖间.jpg"
   },
   {
-    text: "星",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
+    text: "母之劳",
+    picture: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/4 母之劳.png"
   },
   {
-    text: "走",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
+    text: "疫年",
+    picture: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/5 疫年.jpg"
   },
   {
-    text: "牛",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
-  },
-  {
-    text: "骨",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
-  },
-  {
-    text: "人",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
-  },
-  {
-    text: "山",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
-  },
-  {
-    text: "水",
-    show: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/占位.png",
-    detail: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/走.jpg"
+    text: "贝中宝",
+    picture: "cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/6 贝中宝.jpg"
   }
 ];
 

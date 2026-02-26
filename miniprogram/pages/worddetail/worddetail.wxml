@@ -1,8 +1,12 @@
-<view class="container">
-  <image class="detail-image" src="{{image}}" mode="widthFix" show-menu-by-longpress="true" />
+<view class="content">
+  <view class="detail-container">
+    <view class="picture-section" wx:for="{{items}}" wx:key="text">
+      <image class="detail-picture" src="{{item.picture}}" mode="widthFix" show-menu-by-longpress="true"></image>
+    </view>
+  </view>
   
   <!-- 互动栏 -->
-  <view class="action-bar">
+  <view class="action-bar" wx:if="{{hasSingleItem}}">
     <view class="action-item" bindtap="toggleLike">
       <view class="action-text-large">{{isLiked ? '❤️' : '🤍'}}</view>
       <text class="action-text">{{likeCount}}</text>
@@ -18,13 +22,13 @@
   </view>
   
   <!-- 评论输入框 -->
-  <view class="comment-input-container" wx:if="{{showCommentInput}}">
+  <view class="comment-input-container" wx:if="{{hasSingleItem && showCommentInput}}">
     <textarea class="comment-input" placeholder="写评论..." bindinput="onCommentInput" value="{{commentText}}" />
     <button class="comment-btn" bindtap="submitComment">发送</button>
   </view>
   
   <!-- 评论列表 -->
-  <view class="comments-list" wx:if="{{comments.length > 0}}">
+  <view class="comments-list" wx:if="{{hasSingleItem && comments.length > 0}}">
     <view class="comments-header">评论（{{comments.length}}）</view>
     <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
       <image class="comment-avatar" src="{{item.authorAvatar}}" mode="aspectFill"></image>
@@ -35,7 +39,9 @@
         </view>
         <view class="comment-text">{{item.text}}</view>
       </view>
-      <view class="comment-delete" wx:if="{{item._openid === openid}}" bindtap="deleteComment" data-id="{{item._id}}" data-openid="{{item._openid}}">删除</view>
+      <view class="comment-delete" wx:if="{{item._openid === openid}}" bindtap="deleteComment" data-id="{{item._id}}" data-openid="{{item._openid}}">
+        <text class="comment-delete-icon">🗑</text>
+      </view>
     </view>
   </view>
 </view>

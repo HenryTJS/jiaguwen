@@ -47,7 +47,7 @@ Page({
     const index = e.currentTarget.dataset.index;
     const item = this.data.currentItems[index];
     wx.navigateTo({
-      url: `/pages/mapdetail/mapdetail?text=${encodeURIComponent(item.text)}&picture=${encodeURIComponent(item.picture)}&video=${encodeURIComponent(item.video)}`
+      url: `/pages/mapdetail/mapdetail?text=${encodeURIComponent(item.text)}&picture=${encodeURIComponent(item.picture)}`
     });
   }
 });

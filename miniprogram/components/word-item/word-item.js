@@ -2,12 +2,12 @@ Component({
   properties: {
     text: String,
     image: String,
-    detail: String
+    picture: String
   },
   methods: {
     onWordTap() {
       wx.navigateTo({
-        url: `/pages/worddetail/worddetail?image=${encodeURIComponent(this.data.detail)}&text=${encodeURIComponent(this.data.text)}`
+        url: `/pages/worddetail/worddetail?picture=${encodeURIComponent(this.data.picture)}&text=${encodeURIComponent(this.data.text)}`
       });
     }
   }

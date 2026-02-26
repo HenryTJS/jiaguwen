@@ -4,11 +4,6 @@
     <view class="picture-section">
       <image class="detail-picture" src="{{picture}}" mode="widthFix" show-menu-by-longpress="true"></image>
     </view>
-    
-    <!-- 视频部分 -->
-    <view class="video-section">
-      <video class="detail-video" src="{{video}}" controls bindlongpress="longPressVideo"></video>
-    </view>
   </view>
   
   <!-- 互动栏 -->
@@ -45,7 +40,9 @@
         </view>
         <view class="comment-text">{{item.text}}</view>
       </view>
-      <view class="comment-delete" wx:if="{{item._openid === openid}}" bindtap="deleteComment" data-id="{{item._id}}" data-openid="{{item._openid}}">删除</view>
+      <view class="comment-delete" wx:if="{{item._openid === openid}}" bindtap="deleteComment" data-id="{{item._id}}" data-openid="{{item._openid}}">
+        <text class="comment-delete-icon">🗑</text>
+      </view>
     </view>
   </view>
 </view>

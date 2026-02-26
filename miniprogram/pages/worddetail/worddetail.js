@@ -5,6 +5,8 @@ Page({
   data: {
     image: '',
     text: '',
+    items: [],
+    hasSingleItem: false,
     itemType: 'word',
     itemKey: '',
     openid: '',
@@ -16,26 +18,36 @@ Page({
     comments: [],
   },
   onLoad(options) {
-    const decodedImage = options && options.image ? decodeURIComponent(options.image) : '';
     const decodedText = options && options.text ? decodeURIComponent(options.text) : '';
+    const decodedPicture = options && options.picture
+      ? decodeURIComponent(options.picture)
+      : (options && options.image ? decodeURIComponent(options.image) : '');
 
-    // 若未传 image，但传了 text，则尝试依据数据源解析图片路径
-    let finalImage = decodedImage;
-    if (!finalImage && decodedText) {
-      const idx = data.findIndex(d => d.text === decodedText);
-      if (idx >= 0) {
-        finalImage = data[idx].detail;
-      }
+    let items = [];
+    if (decodedText && decodedPicture) {
+      items = [{ text: decodedText, picture: decodedPicture }];
+    } else if (decodedText) {
+      const match = data.filter(d => d.text === decodedText);
+      items = match.length ? match : data;
+    } else {
+      items = data;
     }
 
-    this.setData({ 
-      image: finalImage, 
-      text: decodedText,
-      itemKey: decodedText
+    const hasSingleItem = items.length === 1;
+    const itemKey = hasSingleItem ? items[0].text : '';
+    const image = hasSingleItem ? items[0].picture : '';
+    const text = hasSingleItem ? items[0].text : '';
+
+    this.setData({
+      items,
+      hasSingleItem,
+      itemKey,
+      image,
+      text
     });
 
-    if (decodedText) {
-      wx.setNavigationBarTitle({ title: decodedText });
+    if (hasSingleItem) {
+      wx.setNavigationBarTitle({ title: text });
     }
 
     this.ensureOpenid().then(() => {
@@ -101,6 +113,7 @@ Page({
   onCommentInput(e) {
     this.setData({ commentText: e.detail.value });
   },
+
   
   // 提交评论
   submitComment() {
@@ -186,6 +199,7 @@ Page({
       }
     });
   },
+
 
   ensureOpenid() {
     const app = getApp();
@@ -319,7 +333,7 @@ Page({
   onShareAppMessage() {
     const title = this.data.text || '字详情';
     const image = this.data.image || '';
-    const path = `/pages/worddetail/worddetail?text=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}`;
+    const path = `/pages/worddetail/worddetail?text=${encodeURIComponent(title)}&picture=${encodeURIComponent(image)}`;
 
     return {
       title,
@@ -331,7 +345,7 @@ Page({
   onShareTimeline() {
     const title = this.data.text || '字详情';
     const image = this.data.image || '';
-    const query = `text=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}`;
+    const query = `text=${encodeURIComponent(title)}&picture=${encodeURIComponent(image)}`;
 
     return {
       title,

@@ -4,7 +4,6 @@ Page({
   data: {
     title: '',
     picture: '',
-    video: '',
     itemType: 'map',
     itemKey: '',
     openid: '',
@@ -16,12 +15,11 @@ Page({
     comments: [],
   },
   onLoad(options) {
-    if (options.picture && options.video && options.text) {
+    if (options.picture && options.text) {
       const title = decodeURIComponent(options.text);
       this.setData({
         title: title,
         picture: decodeURIComponent(options.picture),
-        video: decodeURIComponent(options.video),
         itemKey: title
       });
       wx.setNavigationBarTitle({
@@ -31,138 +29,6 @@ Page({
 
     this.ensureOpenid().then(() => {
       this.loadInteractions();
-    });
-  },
-  
-  longPressVideo() {
-    const that = this;
-    wx.showActionSheet({
-      itemList: ['保存视频'],
-      success(res) {
-        if (res.tapIndex === 0) {
-          that.downloadVideo();
-        }
-      }
-    });
-  },
-  
-  downloadVideo() {
-    const videoUrl = this.data.video;
-    if (!videoUrl) {
-      wx.showToast({ title: '视频地址为空', icon: 'none' });
-      return;
-    }
-
-    this.ensureAlbumPermission().then((granted) => {
-      if (!granted) {
-        return;
-      }
-
-      const onDownloaded = (tempFilePath) => {
-        wx.saveVideoToPhotosAlbum({
-          filePath: tempFilePath,
-          success() {
-            wx.showToast({
-              title: '视频保存成功',
-              icon: 'success'
-            });
-          },
-          fail() {
-            wx.showToast({
-              title: '保存失败',
-              icon: 'none'
-            });
-          }
-        });
-      };
-
-      if (videoUrl.startsWith('cloud://')) {
-        if (!wx.cloud || !wx.cloud.downloadFile) {
-          wx.showToast({ title: '云能力不可用', icon: 'none' });
-          return;
-        }
-        wx.cloud.downloadFile({
-          fileID: videoUrl,
-          success: (res) => {
-            if (res && res.tempFilePath) {
-              onDownloaded(res.tempFilePath);
-            } else {
-              wx.showToast({ title: '下载失败', icon: 'none' });
-            }
-          },
-          fail: () => {
-            wx.showToast({ title: '下载失败', icon: 'none' });
-          }
-        });
-        return;
-      }
-
-      wx.downloadFile({
-        url: videoUrl,
-        success(res) {
-          if (res.statusCode === 200 && res.tempFilePath) {
-            onDownloaded(res.tempFilePath);
-            return;
-          }
-          wx.showToast({
-            title: '下载失败',
-            icon: 'none'
-          });
-        },
-        fail() {
-          wx.showToast({
-            title: '下载失败',
-            icon: 'none'
-          });
-        }
-      });
-    });
-  },
-
-  ensureAlbumPermission() {
-    return new Promise((resolve) => {
-      wx.getSetting({
-        success: (res) => {
-          const granted = res.authSetting && res.authSetting['scope.writePhotosAlbum'];
-          if (granted) {
-            resolve(true);
-            return;
-          }
-
-          if (granted === false) {
-            wx.showModal({
-              title: '需要授权',
-              content: '保存视频到相册需要相册权限',
-              confirmText: '去授权',
-              cancelText: '取消',
-              success: (modalRes) => {
-                if (!modalRes.confirm) {
-                  resolve(false);
-                  return;
-                }
-                wx.openSetting({
-                  success: (settingRes) => {
-                    const ok = !!(settingRes.authSetting && settingRes.authSetting['scope.writePhotosAlbum']);
-                    resolve(ok);
-                  },
-                  fail: () => resolve(false)
-                });
-              }
-            });
-            return;
-          }
-
-          wx.authorize({
-            scope: 'scope.writePhotosAlbum',
-            success: () => resolve(true),
-            fail: () => {
-              wx.showToast({ title: '未授权，无法保存', icon: 'none' });
-              resolve(false);
-            }
-          });
-        },
-        fail: () => resolve(false)
-      });
     });
   },
   
@@ -220,6 +86,7 @@ Page({
   onCommentInput(e) {
     this.setData({ commentText: e.detail.value });
   },
+
   
   // 提交评论
   submitComment() {
@@ -305,6 +172,7 @@ Page({
       }
     });
   },
+
 
   ensureOpenid() {
     const app = getApp();
@@ -438,8 +306,7 @@ Page({
   onShareAppMessage() {
     const title = this.data.title || '场景详情';
     const picture = this.data.picture || '';
-    const video = this.data.video || '';
-    const path = `/pages/mapdetail/mapdetail?text=${encodeURIComponent(title)}&picture=${encodeURIComponent(picture)}&video=${encodeURIComponent(video)}`;
+    const path = `/pages/mapdetail/mapdetail?text=${encodeURIComponent(title)}&picture=${encodeURIComponent(picture)}`;
 
     return {
       title,
@@ -451,8 +318,7 @@ Page({
   onShareTimeline() {
     const title = this.data.title || '场景详情';
     const picture = this.data.picture || '';
-    const video = this.data.video || '';
-    const query = `text=${encodeURIComponent(title)}&picture=${encodeURIComponent(picture)}&video=${encodeURIComponent(video)}`;
+    const query = `text=${encodeURIComponent(title)}&picture=${encodeURIComponent(picture)}`;
 
     return {
       title,

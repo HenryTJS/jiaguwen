@@ -17,10 +17,10 @@ Page({
     const { windowWidth } = wx.getSystemInfoSync();
     const gapPx = windowWidth * 0.04; // 4% 宽度的像素值
 
-    // 处理数据，使用 data 中的 show 图片路径
+    // 处理数据，使用 data 中的 picture 图片路径
     const processedData = data.map((item) => ({
       ...item,
-      image: item.show // 使用 data 中的 show 字段作为展示图片
+      image: item.picture // 使用 data 中的 picture 字段作为展示图片
     }));
 
     console.log('处理后的数据:', processedData); // 调试用
@@ -38,9 +38,9 @@ Page({
   },
 
   onWordTap(event) {
-    const { detail, text } = event.currentTarget.dataset;
+    const { picture, text } = event.currentTarget.dataset;
     wx.navigateTo({
-      url: `/pages/worddetail/worddetail?image=${encodeURIComponent(detail)}&text=${encodeURIComponent(text)}`
+      url: `/pages/worddetail/worddetail?picture=${encodeURIComponent(picture)}&text=${encodeURIComponent(text)}`
     });
   },
 

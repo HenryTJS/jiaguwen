@@ -1,25 +1,18 @@
 <view class="content">
   <view class="search-container">
-    <input class="search-input" placeholder="请输入单字" bindinput="onSearchInput" />
+    <input class="search-input" placeholder="请输入标题" bindinput="onSearchInput" />
     <button class="search-button" bindtap="onSearchTap">搜索</button>
   </view>
   <image class="background-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/beijing1.jpg" mode="aspectFill"></image>
-  <view class="word-list">
-    <view
-      wx:for="{{currentBatch}}"
-      wx:key="index"
-      class="word-item"
-      bindtap="onWordTap"
-      data-detail="{{item.detail}}"
-      data-text="{{item.text}}"
-    >
-      <view class="image-container">
-        <image class="word-image" src="{{item.image}}" mode="aspectFill"></image>
+  <view class="items-container">
+    <block wx:for="{{currentBatch}}" wx:key="index">
+      <view class="item-wrapper" bindtap="onWordTap" data-picture="{{item.picture}}" data-text="{{item.text}}">
+        <view class="item-title">{{item.text}}</view>
+        <view class="image-container">
+          <image class="item-image" src="{{item.picture}}" mode="aspectFill"></image>
+        </view>
       </view>
-      <view class="separator"></view>
-      <view class="text-container">
-        <text class="word-text">{{item.text}}</text>
-      </view>
-    </view>
+    </block>
   </view>
+  <view class="more-hint">更多内容敬请期待</view>
 </view>

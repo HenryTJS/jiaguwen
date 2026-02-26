@@ -3,6 +3,6 @@
   "properties": {
     "text": { "type": "string", "value": "" },
     "image": { "type": "string", "value": "" },
-    "detail": { "type": "string", "value": "" }
+    "picture": { "type": "string", "value": "" }
   }
 }
