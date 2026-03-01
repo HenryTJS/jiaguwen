@@ -1,4 +1,6 @@
 const oracle = require('../../utils/oracle');
+const ORACLE_FONT_FAMILY = 'OracleKaiTi';
+const ORACLE_FONT_URL = '';
 
 Page({
   data: {
@@ -11,6 +13,7 @@ Page({
   },
   onLoad() {
     console.log('新页面加载完成');
+    this.loadOracleFontFace();
 
     // 计算卜辞编号
     const baseDate = new Date(2025, 11, 21); // 2025年12月21日
@@ -25,6 +28,22 @@ Page({
         b: oracle[oracleIndex].b,
         c: oracle[oracleIndex].c,
         d: oracle[oracleIndex].d,
+      },
+    });
+  },
+  loadOracleFontFace() {
+    if (!ORACLE_FONT_URL) {
+      return;
+    }
+
+    wx.loadFontFace({
+      family: ORACLE_FONT_FAMILY,
+      source: `url('${ORACLE_FONT_URL}')`,
+      success: () => {
+        console.log('卜辞字体加载成功');
+      },
+      fail: (err) => {
+        console.warn('卜辞字体加载失败，回退系统字体', err);
       },
     });
   },

@@ -25,28 +25,30 @@ Page({
       },
     });
   },
-  viewDictionary() {
-    wx.showToast({
-      title: '功能暂未开通',
-      icon: 'none',
-    });
-  },
-  viewMap() {
-    wx.showToast({
-      title: '功能暂未开通',
-      icon: 'none',
-    });
-  },
-  downloadResources() {
-    wx.showToast({
-      title: '功能暂未开通',
-      icon: 'none',
-    });
-  },
-  openStore() {
-    wx.showToast({
-      title: '功能暂未开通',
-      icon: 'none',
+  logout() {
+    wx.showModal({
+      title: '提示',
+      content: '确认退出登录吗？',
+      success: (res) => {
+        if (!res.confirm) {
+          return;
+        }
+
+        const app = getApp();
+        app.globalData.userInfo = null;
+        app.globalData.isLoggedIn = false;
+        app.globalData.userKey = 'guest';
+
+        try {
+          wx.removeStorageSync('userInfo');
+          wx.removeStorageSync('isLoggedIn');
+          wx.removeStorageSync('userKey');
+        } catch (e) {}
+
+        wx.reLaunch({
+          url: '/pages/index/index',
+        });
+      },
     });
   },
 });

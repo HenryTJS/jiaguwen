@@ -4,7 +4,7 @@ body, html {
   overflow-x: hidden;
 }
 
-.container {
+.newpage-container {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -28,76 +28,78 @@ body, html {
   align-items: center;
   width: 100%;
   height: 100vh;
-  padding: 20px;
-  padding-top: 0px;
+  padding: 0 20rpx;
   box-sizing: border-box;
+}
+
+.top-image-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 0;
 }
 
 .top-image {
   width: 100%;
-  position: relative;
-  left: 50%; /* 将图片的左边界移动到屏幕中心 */
-  transform: translateX(-50%); /* 通过平移使图片居中 */
-  margin-bottom: -70px;
-  top: -100px;
   display: block;
-  margin-left: auto;
-  margin-right: auto; /* 确保图片居中 */
+  margin: 30rpx auto 0;
 }
 
 .oracle-title-image {
-  position: relative;
-  top: -680rpx;
-  left: -20%;
-  width: 40%;
+  position: absolute;
+  top: 40rpx;
+  left: 10%;
+  width: 280rpx;
+  display: block;
   z-index: 2;
 }
 
-.oracle-a {
+.oracle-lines {
+  position: absolute;
+  left: 20rpx;
+  bottom: 16rpx;
   z-index: 3;
-  font-size: 50rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.oracle-a {
+  font-size: 54rpx;
   font-weight: 700;
-  font-family: 'KaiTi', '楷体', serif;
+  font-family: 'OracleKaiTi', 'Kaiti SC', 'STKaiti', 'KaiTi', 'BiauKai', 'DFKai-SB', '楷体', 'Songti SC', serif;
   text-align: left;
-  align-self: flex-start;
-  margin-left: 40rpx;
-  margin-top: -840rpx;
+  margin-top: 0;
+  line-height: 1.2;
   color: #d2691e;
 }
 
 .oracle-b {
-  z-index: 3;
-  font-size: 50rpx;
+  font-size: 54rpx;
   font-weight: 700;
-  font-family: 'KaiTi', '楷体', serif;
+  font-family: 'OracleKaiTi', 'Kaiti SC', 'STKaiti', 'KaiTi', 'BiauKai', 'DFKai-SB', '楷体', 'Songti SC', serif;
   text-align: left;
-  align-self: flex-start;
-  margin-left: 40rpx;
-  margin-top: 10rpx;
+  margin-top: 0;
+  line-height: 1.2;
   color: #d2691e;
 }
 
 .oracle-c {
-  z-index: 3;
-  font-size: 50rpx;
+  font-size: 54rpx;
   font-weight: 700;
-  font-family: 'KaiTi', '楷体', serif;
+  font-family: 'OracleKaiTi', 'Kaiti SC', 'STKaiti', 'KaiTi', 'BiauKai', 'DFKai-SB', '楷体', 'Songti SC', serif;
   text-align: left;
-  align-self: flex-start;
-  margin-left: 40rpx;
-  margin-top: 10rpx;
+  margin-top: 0;
+  line-height: 1.2;
   color: #d2691e;
 }
 
 .oracle-d {
-  z-index: 3;
-  font-size: 50rpx;
+  font-size: 54rpx;
   font-weight: 700;
-  font-family: 'KaiTi', '楷体', serif;
+  font-family: 'OracleKaiTi', 'Kaiti SC', 'STKaiti', 'KaiTi', 'BiauKai', 'DFKai-SB', '楷体', 'Songti SC', serif;
   text-align: left;
-  align-self: flex-start;
-  margin-left: 40rpx;
-  margin-top: 10rpx;
+  margin-top: 0;
+  line-height: 1.2;
   color: #d2691e;
 }
 
@@ -107,7 +109,7 @@ body, html {
   gap: 10px;
   width: 95%;
   max-width: 500px;
-  margin: 50px auto 0;
+  margin: 24rpx auto 0;
 }
 
 .grid-item {
