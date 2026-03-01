@@ -18,7 +18,7 @@
           <image 
             class="item-image" 
             src="{{item.picture}}" 
-            mode="aspectFill"
+            mode="widthFix"
           ></image>
         </view>
       </view>

@@ -9,7 +9,7 @@
       <view class="item-wrapper" bindtap="onWordTap" data-picture="{{item.picture}}" data-text="{{item.text}}">
         <view class="item-title">{{item.text}}</view>
         <view class="image-container">
-          <image class="item-image" src="{{item.picture}}" mode="aspectFill"></image>
+          <image class="item-image" src="{{item.picture}}" mode="widthFix"></image>
         </view>
       </view>
     </block>
