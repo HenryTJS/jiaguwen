@@ -106,6 +106,15 @@ cd [project-name]
 
 ## 🔧 配置说明
 
+### 清理历史重复点赞（一次性）
+
+当同一用户对同一条内容产生了多条 `likes` 记录时，可执行一次去重清理：
+
+1. 在微信开发者工具中右键上传并部署云函数 `cloudfunctions/cleanupLikes`。
+2. 先在控制台或代码中调用一次预检查：`wx.cloud.callFunction({ name: 'cleanupLikes', data: { dryRun: true } })`。
+3. 确认返回的 `duplicateCount` 大于 0 后，执行正式清理：`wx.cloud.callFunction({ name: 'cleanupLikes', data: { dryRun: false } })`。
+4. 清理完成后重新进入详情页，点赞数会按“同一用户只计 1 次”显示。
+
 ### 全局配置 (app.json)
 
 - **tabBar**：底部标签栏，包含首页和个人中心

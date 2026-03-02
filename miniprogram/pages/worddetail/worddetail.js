@@ -12,6 +12,7 @@ Page({
     openid: '',
     isLiked: false,
     likeCount: 0,
+    likeSubmitting: false,
     commentCount: 0,
     showCommentInput: false,
     commentText: '',
@@ -57,50 +58,58 @@ Page({
   
   // 点赞功能
   toggleLike() {
-    const { isLiked, itemType, itemKey } = this.data;
+    const { itemType, itemKey, likeSubmitting } = this.data;
     if (!itemKey) {
       return;
     }
+    if (likeSubmitting) {
+      return;
+    }
+
+    this.setData({ likeSubmitting: true });
 
     this.ensureOpenid().then((openid) => {
       if (!openid) {
         wx.showToast({ title: '登录失败，请稍后重试', icon: 'none' });
+        this.setData({ likeSubmitting: false });
         return;
       }
 
       const db = wx.cloud.database();
       const likes = db.collection('likes');
 
-      if (isLiked) {
-        likes.where({ type: itemType, key: itemKey, _openid: openid }).get()
-          .then((res) => {
-            const removeTasks = (res.data || []).map((item) => likes.doc(item._id).remove());
-            return Promise.all(removeTasks);
-          })
-          .then(() => {
-            this.setData({ isLiked: false });
-            this.refreshLikeCount();
-          })
-          .catch((err) => {
-            console.error('toggleLike remove failed', err);
-            wx.showToast({ title: '取消点赞失败', icon: 'none' });
-          });
-        return;
-      }
+      likes.where({ type: itemType, key: itemKey, _openid: openid }).get()
+        .then((res) => {
+          const existedLikes = res.data || [];
 
-      likes.add({
-        data: {
-          type: itemType,
-          key: itemKey,
-          createdAt: db.serverDate()
-        }
-      }).then(() => {
-        this.setData({ isLiked: true });
-        this.refreshLikeCount();
-      }).catch((err) => {
-        console.error('toggleLike add failed', err);
-        wx.showToast({ title: '点赞失败', icon: 'none' });
-      });
+          if (existedLikes.length > 0) {
+            const removeTasks = existedLikes.map((item) => likes.doc(item._id).remove());
+            return Promise.all(removeTasks).then(() => {
+              this.setData({ isLiked: false });
+            });
+          }
+
+          return likes.add({
+            data: {
+              type: itemType,
+              key: itemKey,
+              createdAt: db.serverDate()
+            }
+          }).then(() => {
+            this.setData({ isLiked: true });
+          });
+        })
+        .then(() => this.refreshLikeCount())
+        .catch((err) => {
+          console.error('toggleLike failed', err);
+          wx.showToast({ title: '点赞操作失败', icon: 'none' });
+        })
+        .finally(() => {
+          this.setData({ likeSubmitting: false });
+        });
+    }).catch((err) => {
+      console.error('ensureOpenid failed in toggleLike', err);
+      this.setData({ likeSubmitting: false });
     });
   },
   
@@ -249,18 +258,34 @@ Page({
   },
 
   refreshLikeCount() {
-    const { itemType, itemKey } = this.data;
-    if (!itemKey) {
-      return;
-    }
-
-    const db = wx.cloud.database();
-    db.collection('likes').where({ type: itemType, key: itemKey }).count()
-      .then((res) => {
-        this.setData({ likeCount: res.total || 0 });
+    this.getUniqueLikeCount()
+      .then((total) => {
+        this.setData({ likeCount: total });
       })
       .catch((err) => {
         console.error('refreshLikeCount failed', err);
+      });
+  },
+
+  getUniqueLikeCount() {
+    const { itemType, itemKey } = this.data;
+    if (!itemKey) {
+      return Promise.resolve(0);
+    }
+
+    const db = wx.cloud.database();
+    return db.collection('likes')
+      .aggregate()
+      .match({ type: itemType, key: itemKey })
+      .group({ _id: '$_openid' })
+      .end()
+      .then((res) => {
+        const list = (res && res.list) || [];
+        return list.length;
+      })
+      .catch(() => {
+        return db.collection('likes').where({ type: itemType, key: itemKey }).count()
+          .then((res) => res.total || 0);
       });
   },
 
@@ -300,7 +325,7 @@ Page({
     }
 
     const db = wx.cloud.database();
-    const likeCountPromise = db.collection('likes').where({ type: itemType, key: itemKey }).count();
+    const likeCountPromise = this.getUniqueLikeCount();
     const commentPromise = db.collection('comments')
       .where({ type: itemType, key: itemKey })
       .orderBy('createdAt', 'desc')
@@ -311,7 +336,7 @@ Page({
       : Promise.resolve({ total: 0 });
 
     Promise.all([likeCountPromise, commentPromise, likedPromise])
-      .then(([likeRes, commentRes, likedRes]) => {
+      .then(([likeTotal, commentRes, likedRes]) => {
         const comments = (commentRes.data || []).map((item) => ({
           ...item,
           authorName: item.authorName || '匿名用户',
@@ -319,7 +344,7 @@ Page({
           time: formatTime(item.createdAt)
         }));
         this.setData({
-          likeCount: likeRes.total || 0,
+          likeCount: likeTotal || 0,
           comments,
           commentCount: comments.length,
           isLiked: (likedRes.total || 0) > 0
