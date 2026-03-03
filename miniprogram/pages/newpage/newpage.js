@@ -16,7 +16,7 @@ Page({
     this.loadOracleFontFace();
 
     // 计算卜辞编号
-    const baseDate = new Date(2025, 11, 21); // 2025年12月21日
+    const baseDate = new Date(2025, 11, 21);
     const currentDate = new Date();
     const diffDays = Math.floor((currentDate.getTime() - baseDate.getTime()) / (1000 * 60 * 60 * 24));
     const oracleIndex = diffDays % oracle.length;

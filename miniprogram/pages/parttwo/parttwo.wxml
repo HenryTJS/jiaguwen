@@ -1,6 +1,4 @@
 <view class="content">
-  <image class="background-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/beijing2.jpg" mode="aspectFill"></image>
-  
   <!-- 搜索框 -->
   <view class="search-container">
     <input class="search-input" placeholder="请输入标题" bindinput="onSearchInput" />
