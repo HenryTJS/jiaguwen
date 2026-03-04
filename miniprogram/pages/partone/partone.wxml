@@ -6,9 +6,65 @@
   <view class="items-container">
     <block wx:for="{{currentBatch}}" wx:key="index">
       <view class="item-wrapper" bindtap="onWordTap" data-picture="{{item.picture}}" data-text="{{item.text}}">
-        <view class="item-title">{{item.text}}</view>
         <view class="image-container">
           <image class="item-image" src="{{item.picture}}" mode="widthFix"></image>
+        </view>
+        <view class="item-title">{{item.text}}</view>
+
+        <view class="card-action-bar" catchtap="noop">
+          <view class="card-action-item" bindtap="toggleLike" data-key="{{item.text}}">
+            <view class="action-text-large">{{item._ui.isLiked ? '❤️' : '🤍'}}</view>
+            <text class="action-text">{{item._ui.likeCount}}</text>
+          </view>
+          <view class="card-action-item" bindtap="toggleCommentInput" data-key="{{item.text}}">
+            <view class="action-text-large">💬</view>
+            <text class="action-text">{{item._ui.commentCount}}</text>
+          </view>
+          <button
+            class="card-action-item card-action-button"
+            open-type="share"
+            data-text="{{item.text}}"
+            data-picture="{{item.picture}}"
+            bindtap="prepareShare"
+          >
+            <view class="action-text-large">🔄</view>
+            <text class="action-text">转发</text>
+          </button>
+        </view>
+
+        <view class="comment-input-container" wx:if="{{item._ui.showCommentInput}}" catchtap="noop">
+          <textarea
+            class="comment-input"
+            placeholder="写评论..."
+            data-key="{{item.text}}"
+            bindinput="onCommentInput"
+            value="{{item._ui.commentText}}"
+          />
+          <button class="comment-btn" data-key="{{item.text}}" bindtap="submitComment">发送</button>
+        </view>
+
+        <view class="comments-list" wx:if="{{item._ui.comments.length > 0}}" catchtap="noop">
+          <view class="comments-header">评论（{{item._ui.commentCount}}）</view>
+          <view class="comment-item" wx:for="{{item._ui.comments}}" wx:key="_id">
+            <image class="comment-avatar" src="{{item.authorAvatar}}" mode="aspectFill"></image>
+            <view class="comment-content">
+              <view class="comment-header">
+                <view class="comment-author">{{item.authorName}}</view>
+                <view class="comment-time">{{item.time}}</view>
+              </view>
+              <view class="comment-text">{{item.text}}</view>
+            </view>
+            <view
+              class="comment-delete"
+              wx:if="{{item._openid === openid}}"
+              bindtap="deleteComment"
+              data-id="{{item._id}}"
+              data-openid="{{item._openid}}"
+              data-key="{{item.key}}"
+            >
+              <text class="comment-delete-icon">🗑</text>
+            </view>
+          </view>
         </view>
       </view>
     </block>
