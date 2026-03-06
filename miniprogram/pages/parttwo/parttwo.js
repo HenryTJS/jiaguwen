@@ -116,6 +116,13 @@ Page({
     });
   },
 
+  goToDetailComment(e) {
+    const { text, picture } = e.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/mapdetail/mapdetail?text=${encodeURIComponent(text)}&picture=${encodeURIComponent(picture)}&openComment=1`
+    });
+  },
+
   ensureOpenid() {
     const app = getApp();
     if (app.globalData.openid) {

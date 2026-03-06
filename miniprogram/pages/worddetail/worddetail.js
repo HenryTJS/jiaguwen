@@ -39,12 +39,15 @@ Page({
     const image = hasSingleItem ? items[0].picture : '';
     const text = hasSingleItem ? items[0].text : '';
 
+    const shouldOpenComment = !!(options && String(options.openComment) === '1');
+
     this.setData({
       items,
       hasSingleItem,
       itemKey,
       image,
-      text
+      text,
+      showCommentInput: shouldOpenComment
     });
 
     if (hasSingleItem) {
@@ -53,6 +56,18 @@ Page({
 
     this.ensureOpenid().then(() => {
       this.loadInteractions();
+      if (shouldOpenComment) {
+        setTimeout(() => {
+          this.scrollToCommentArea();
+        }, 200);
+      }
+    });
+  },
+
+  scrollToCommentArea() {
+    wx.pageScrollTo({
+      selector: '#comment-input-anchor',
+      duration: 200
     });
   },
   

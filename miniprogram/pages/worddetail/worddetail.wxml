@@ -4,8 +4,6 @@
       <image class="detail-picture" src="{{item.picture}}" mode="widthFix" show-menu-by-longpress="true"></image>
     </view>
   </view>
-  
-  <!-- 互动栏 -->
   <view class="action-bar" wx:if="{{hasSingleItem}}">
     <view class="action-item" bindtap="toggleLike">
       <view class="action-text-large">{{isLiked ? '❤️' : '🤍'}}</view>
@@ -20,14 +18,10 @@
       <text class="action-text">转发</text>
     </button>
   </view>
-  
-  <!-- 评论输入框 -->
-  <view class="comment-input-container" wx:if="{{hasSingleItem && showCommentInput}}">
+  <view id="comment-input-anchor" class="comment-input-container" wx:if="{{hasSingleItem && showCommentInput}}">
     <textarea class="comment-input" placeholder="写评论..." bindinput="onCommentInput" value="{{commentText}}" />
     <button class="comment-btn" bindtap="submitComment">发送</button>
   </view>
-  
-  <!-- 评论列表 -->
   <view class="comments-list" wx:if="{{hasSingleItem && comments.length > 0}}">
     <view class="comments-header">评论（{{comments.length}}）</view>
     <view class="comment-item" wx:for="{{comments}}" wx:key="_id">

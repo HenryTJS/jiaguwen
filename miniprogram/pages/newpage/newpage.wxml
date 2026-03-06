@@ -1,14 +1,9 @@
-<!--newpage.wxml-->
 <view class="newpage-container">
   <image class="background-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/beijing.jpg" mode="aspectFill"></image>
-
-  <!-- 内容区域 -->
   <view class="content">
     <view class="top-image-wrapper">
       <image class="top-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/psd16222.png" mode="widthFix"></image>
     </view>
-
-    <!-- 图片区域 -->
     <view class="image-grid">
       <view class="grid-item">
         <image class="grid-image" src="cloud://cloud1-0gqn8jn79cf1d67d.636c-cloud1-0gqn8jn79cf1d67d-1403428090/1.png" mode="aspectFit" bindtap="onImageClick" data-src="/images/1.png"></image>
@@ -28,31 +23,25 @@
       </view>
     </view>
   </view>
-
   <view class="today-entry" bindtap="openTodayPopup">今日卜辞</view>
-
   <view wx:if="{{showTodayPopup}}" class="today-mask" bindtap="closeTodayPopup">
     <view class="today-popup" catchtap="stopMaskClose">
       <view class="popup-close" bindtap="closeTodayPopup">×</view>
       <view class="popup-title">今日卜辞</view>
-
       <scroll-view scroll-y="true" class="popup-scroll">
         <view class="popup-section-title">签文</view>
         <block wx:for="{{poemLines}}" wx:key="index">
           <view class="popup-line">{{item}}</view>
         </block>
-
         <view class="popup-section-title section-gap">解签</view>
         <block wx:for="{{explanationLines}}" wx:key="index">
           <view class="popup-line">{{item}}</view>
         </block>
       </scroll-view>
-
       <view class="popup-actions">
         <view class="action-btn" bindtap="generatePosterImage">生成图片</view>
       </view>
     </view>
   </view>
-
   <canvas id="todayPosterCanvas" type="2d" class="today-canvas"></canvas>
 </view>

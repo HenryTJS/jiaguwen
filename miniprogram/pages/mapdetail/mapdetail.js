@@ -15,12 +15,15 @@ Page({
     comments: [],
   },
   onLoad(options) {
+    const shouldOpenComment = !!(options && String(options.openComment) === '1');
+
     if (options.picture && options.text) {
       const title = decodeURIComponent(options.text);
       this.setData({
         title: title,
         picture: decodeURIComponent(options.picture),
-        itemKey: title
+        itemKey: title,
+        showCommentInput: shouldOpenComment
       });
       wx.setNavigationBarTitle({
         title: title
@@ -29,6 +32,18 @@ Page({
 
     this.ensureOpenid().then(() => {
       this.loadInteractions();
+      if (shouldOpenComment) {
+        setTimeout(() => {
+          this.scrollToCommentArea();
+        }, 200);
+      }
+    });
+  },
+
+  scrollToCommentArea() {
+    wx.pageScrollTo({
+      selector: '#comment-input-anchor',
+      duration: 200
     });
   },
   

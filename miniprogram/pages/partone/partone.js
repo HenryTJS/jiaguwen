@@ -93,6 +93,13 @@ Page({
     });
   },
 
+  goToDetailComment(event) {
+    const { picture, text } = event.currentTarget.dataset;
+    wx.navigateTo({
+      url: `/pages/worddetail/worddetail?picture=${encodeURIComponent(picture)}&text=${encodeURIComponent(text)}&openComment=1`
+    });
+  },
+
   noop() {},
 
   onSearchInput(event) {

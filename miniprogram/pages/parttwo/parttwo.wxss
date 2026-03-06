@@ -2,6 +2,8 @@
   position: relative;
   min-height: 100vh;
   background-color: #e9d7be;
+  padding-top: 20rpx;
+  box-sizing: border-box;
 }
 
 .search-container {
@@ -57,7 +59,7 @@
 
 .item-title {
   padding: 20rpx;
-  font-size: 48rpx;
+  font-size: 40rpx;
   font-weight: bold;
   color: #333;
   line-height: 1.4;
