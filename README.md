@@ -1,187 +1,145 @@
 # 甲骨文学习小程序
 
-一个基于微信小程序的甲骨文学习应用，提供甲骨文字典、每日卜辞、地图场景等功能，帮助用户了解和学习中国古代文字文化。
+基于微信小程序原生框架开发的学习类项目，聚焦甲骨文入门与文化展示，包含每日卜辞、字典浏览、详情互动（点赞/评论）等功能。
 
-## 📱 功能特性
+## 项目简介
 
-### 🏠 首页
-- **每日卜辞**：根据日期自动推送甲骨文卜辞，每日更新
-- **快捷入口**：快速访问字典等功能；资源下载和商城入口目前仅提示未开通
+- 端侧：微信小程序（JavaScript + WXSS/SCSS）
+- 后端：微信云开发（云函数 + 云数据库）
+- 渲染：`Skyline` + `glass-easel`
+- 当前定位：课程/作品型项目，可继续扩展为完整学习应用
 
-### 📖 甲骨文字典
-- 展示常用甲骨文字（旦、牧、雨、星、走、牛、骨、人、山、水等）
-- 提供搜索功能，快速查找甲骨文字
-- 点击查看详细的文字解析和演变过程
-- 详情页支持点赞、评论、分享（本地体验）
+## 主要功能
 
-### 🗺️ 场景地图
-- 商人的一天、农夫的一天等主题场景
-- 图文视频结合，生动展示甲骨文在古代生活中的应用
-- 详情页支持视频保存、点赞、评论、分享（本地体验）
+### 1. 首页（`pages/newpage/newpage`）
 
-### 👤 个人中心
-- 用户登录/注册
-- 个人信息管理
-- 学习记录查看（待开发）
+- 展示入口卡片（字典、场景等）
+- 提供“今日卜辞”能力
+- 支持分享给好友/分享到朋友圈
+- 未开放功能（资源下载、商城）会给出提示
 
-## 🛠️ 技术栈
+### 2. 字典页（`pages/partone/partone`）
 
-- **框架**：微信小程序原生框架
-- **语言**：JavaScript
-- **样式**：WXSS / SCSS
-- **类型支持**：TypeScript 类型定义
-- **UI框架**：Glass-Easel 组件框架
-- **渲染引擎**：Skyline 渲染引擎
+- 读取 `miniprogram/utils/data.js` 的甲骨文字数据
+- 支持关键词搜索
+- 点击进入详情页
+- 列表内支持点赞、评论入口
 
-## 📁 项目结构
+### 3. 文字详情页（`pages/worddetail/worddetail`）
 
+- 展示单字图片与信息
+- 支持点赞/取消点赞
+- 支持评论发布与删除（仅可删除本人评论）
+
+### 4. 个人中心（`pages/mine/mine`）
+
+- 展示用户登录态和用户信息
+- 依赖云函数获取 `openid`
+
+## 技术与依赖
+
+- 微信小程序原生框架
+- 云函数：`wx-server-sdk`
+- 类型定义：`miniprogram-api-typings`
+- 其他：无重型第三方 UI 或状态管理依赖
+
+> 说明：仓库根目录 `package.json` 主要用于开发期类型依赖；运行环境以微信开发者工具为主。
+
+## 目录结构
+
+```text
+.
+├─ cloudfunctions/
+│  ├─ login/               # 获取当前用户 openid
+│  └─ cleanupLikes/        # 清理重复点赞记录
+├─ miniprogram/
+│  ├─ app.js               # 小程序入口与云环境初始化
+│  ├─ app.json             # 全局路由与窗口配置
+│  ├─ components/
+│  │  └─ word-item/
+│  ├─ pages/
+│  │  ├─ newpage/          # 首页
+│  │  ├─ index/            # 登录/授权页
+│  │  ├─ mine/             # 个人中心
+│  │  ├─ partone/          # 字典页
+│  │  ├─ parttwo/          # 预留页面
+│  │  ├─ mapdetail/        # 场景详情
+│  │  └─ worddetail/       # 文字详情
+│  └─ utils/
+│     ├─ data.js           # 甲骨文字数据
+│     ├─ today.js          # 今日卜辞数据
+│     ├─ map.js            # 场景数据
+│     └─ util.js           # 通用工具
+└─ typings/                # 微信 API 类型声明
 ```
-miniprogram/
-├── app.js                 # 小程序入口文件
-├── app.json              # 小程序全局配置
-├── app.scss              # 全局样式
-├── components/           # 自定义组件
-│   └── word-item/       # 单字展示组件
-├── pages/                # 页面文件
-│   ├── newpage/         # 首页（每日卜辞）
-│   ├── index/           # 登录页
-│   ├── mine/            # 个人中心
-│   ├── partone/         # 字典列表
-│   ├── parttwo/         # （保留页面）
-│   ├── mapdetail/       # 地图详情
-│   └── worddetail/      # 文字详情
-├── utils/                # 工具函数
-│   ├── data.js          # 甲骨文字数据
-│   ├── oracle.js        # 卜辞数据（60条天干地支）
-│   ├── map.js           # 地图场景数据
-│   └── util.js          # 通用工具函数
-└── images/               # 图片资源
+
+## 运行方式
+
+### 1. 准备环境
+
+- 安装微信开发者工具
+- 准备一个可用的小程序 AppID
+- 开通云开发环境
+
+### 2. 导入项目
+
+1. 使用微信开发者工具打开仓库根目录（包含 `project.config.json`）。
+2. 确认项目配置中的 `miniprogramRoot` 为 `miniprogram/`。
+3. 根据你的账号调整 `appid`（`project.config.json`）。
+
+### 3. 配置云开发
+
+1. 在微信开发者工具中开通并绑定云环境。
+2. 修改 `miniprogram/app.js` 中 `wx.cloud.init({ env: '...' })` 的环境 ID。
+3. 上传并部署云函数：
+   - `cloudfunctions/login`
+   - `cloudfunctions/cleanupLikes`
+
+### 4. 初始化云数据库（建议）
+
+项目代码中会使用以下集合，请先创建：
+
+- `likes`
+- `comments`
+- `daily_oracle`
+
+可按需设置读写权限，开发阶段可先使用较宽松规则，发布前再收紧。
+
+## 云函数说明
+
+### `login`
+
+- 功能：返回当前用户 `openid/appid/unionid`
+- 调用位置：`miniprogram/app.js`
+
+### `cleanupLikes`
+
+- 功能：按 `type + key + _openid` 去重点赞数据
+- 参数：
+  - `dryRun: true` 仅统计，不删除
+  - `dryRun: false` 执行删除
+
+示例：
+
+```js
+wx.cloud.callFunction({
+  name: 'cleanupLikes',
+  data: { dryRun: true }
+})
 ```
 
-## 🚀 快速开始
+## 已知说明
 
-### 环境要求
+- `parttwo` 当前为预留页面。
+- 部分首页入口仅展示“暂未开通”提示。
+- 点赞数量在前端按“同一用户只计 1 次”逻辑聚合统计。
 
-- 微信开发者工具
-- Node.js (可选，用于依赖管理)
+## 开发建议
 
-### 安装步骤
+- 新增文字时，优先更新 `miniprogram/utils/data.js` 并补充图片资源。
+- 扩展每日卜辞时，更新 `miniprogram/utils/today.js`。
+- 若互动数据量增长，建议补充索引并优化查询。
 
-1. 克隆项目到本地
-```bash
-git clone [your-repository-url]
-cd [project-name]
-```
+## License
 
-2. 使用微信开发者工具打开项目
-   - 选择 `miniprogram` 目录作为项目根目录
-   - 填入你的小程序 AppID
-
-3. 配置项目
-   - 修改 `project.config.json` 和 `project.private.config.json` 中的配置
-   - 根据需要调整 AppID 和项目设置
-
-4. 编译运行
-   - 点击微信开发者工具的"编译"按钮
-   - 在模拟器或真机上预览
-
-## 📝 数据说明
-
-### 卜辞数据
-- 包含60条天干地支卜辞（甲子到癸亥）
-- 每条卜辞包含：占卜日期、占卜内容、占辞和吉凶判断
-- 根据起始日期（2025年12月21日）自动循环显示
-
-### 甲骨文字数据
-- 目前收录10个常用甲骨文字
-- 每个文字包含：文字本身、展示图片、详情图片
-- 支持扩展添加更多文字
-
-### 地图场景数据
-- 提供不同主题的场景展示
-- 包含图片和视频资源
-
-### 互动数据
-- 点赞、评论、分享目前为本地体验，未接入后端服务
-
-## 🔧 配置说明
-
-### 清理历史重复点赞（一次性）
-
-当同一用户对同一条内容产生了多条 `likes` 记录时，可执行一次去重清理：
-
-1. 在微信开发者工具中右键上传并部署云函数 `cloudfunctions/cleanupLikes`。
-2. 先在控制台或代码中调用一次预检查：`wx.cloud.callFunction({ name: 'cleanupLikes', data: { dryRun: true } })`。
-3. 确认返回的 `duplicateCount` 大于 0 后，执行正式清理：`wx.cloud.callFunction({ name: 'cleanupLikes', data: { dryRun: false } })`。
-4. 清理完成后重新进入详情页，点赞数会按“同一用户只计 1 次”显示。
-
-### 全局配置 (app.json)
-
-- **tabBar**：底部标签栏，包含首页和个人中心
-- **navigationStyle**：导航栏样式设置
-- **rendererOptions**：使用 Skyline 渲染引擎
-- **componentFramework**：使用 Glass-Easel 组件框架
-- **lazyCodeLoading**：按需注入，优化性能
-
-### TypeScript 支持
-
-项目包含完整的 TypeScript 类型定义文件：
-- `typings/index.d.ts`：类型入口
-- `typings/types/wx/`：微信小程序 API 类型定义
-
-## 📦 依赖
-
-### 生产依赖
-无外部依赖，使用微信小程序原生能力
-
-### 开发依赖
-- `miniprogram-api-typings`: 微信小程序 API 类型定义
-
-## 🎨 自定义组件
-
-### word-item
-单字展示组件，用于字典页面展示甲骨文字卡片
-
-## 🔐 用户系统
-
-- 支持微信授权登录
-- 本地存储用户信息和登录状态
-- 全局状态管理（App.globalData）
-
-## 📱 页面说明
-
-| 页面 | 路径 | 功能 |
-|------|------|------|
-| 首页 | pages/newpage/newpage | 每日卜辞展示与快捷入口 |
-| 登录页 | pages/index/index | 用户登录注册 |
-| 个人中心 | pages/mine/mine | 个人信息管理 |
-| 字典列表 | pages/partone/partone | 甲骨文字列表与搜索 |
-| 文字详情 | pages/worddetail/worddetail | 单字详细解析与互动 |
-| 地图详情 | pages/mapdetail/mapdetail | 场景展示、视频与互动 |
-| 保留页面 | pages/parttwo/parttwo | 备用/占位 |
-
-## 🔮 待开发功能
-
-- [ ] 资源下载功能
-- [ ] 商城系统
-- [ ] 学习记录和进度追踪
-- [ ] 更多甲骨文字收录
-- [ ] 文字演变动画
-- [ ] 社区交流功能
-- [ ] 每日打卡系统
-
-## 📄 License
-
-本项目遵循 LICENSE 文件中的许可协议。
-
-## 👥 贡献
-
-欢迎提交 Issue 和 Pull Request！
-
-## 📮 联系方式
-
-如有问题或建议，欢迎联系项目维护者。
-
----
-
-**注意**：本项目仅用于学习交流，图片和内容资源请确保符合相关版权规定。
+见 `LICENSE` 文件。
